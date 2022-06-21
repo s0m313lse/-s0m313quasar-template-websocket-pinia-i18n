@@ -1,9 +1,9 @@
 {
-  "name": "quasar-project",
+  "name": "quasar-template-pinia-socketio",
   "version": "0.0.1",
-  "description": "A Quasar Project",
-  "productName": "Quasar App",
-  "author": "me",
+  "description": "Event driven state changes using socket-io and pinia",
+  "productName": "QTemplate SocketIO Pinia",
+  "author": "s0m313lse",
   "private": true,
   "scripts": {
     "lint": "eslint --ext .js,.vue ./",

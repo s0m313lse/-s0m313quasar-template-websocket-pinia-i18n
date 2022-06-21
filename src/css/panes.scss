@@ -1,0 +1,52 @@
+$pane-margin: 1.5rem;
+$pane-left-width: 24rem;
+
+.pane{
+  z-index:1010;
+  transition: transform 0.3s;
+
+  @media (min-width: 26rem) {
+    border-radius: 2rem 2rem 2rem 0rem;
+    border-right: .1rem solid white;
+    border-bottom: .1rem solid white;
+    // border-top: .1rem solid rgb(32, 32, 32);
+    // border-left: .1rem solid rgb(32, 32, 32);
+    overflow: hidden;
+    margin-bottom: $pane-margin;
+    margin-left: $pane-margin;
+    margin-right: $pane-margin;
+    position: absolute;
+    height: calc(100% - (#{$pane-margin} * 2)) !important;
+
+    &.pane-desktop-left{
+      width: $pane-left-width !important;
+    }
+
+    &.pane-desktop-right{
+      left: $pane-left-width + $pane-margin;
+      width: calc(100% - #{$pane-left-width} - (#{$pane-margin} * 3)) !important
+    }
+
+    &.pane-desktop-full-width{
+      width: calc(100% - (#{$pane-margin} * 2))
+    }
+  }
+
+  &.mobile-offscreen{
+    @media (max-width: 1023px) {
+      transform: translateX(100%)
+    }
+  }
+}
+
+.pane-toolbar{
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+}
+
+.pane-header{
+  border-bottom: .1rem solid white;
+}

@@ -1,0 +1,72 @@
+// default text sizes
+$text-sizes: 12,16,21;
+
+// text size options and multipliers
+$text-size-options: (
+  'sm' : 0.8,
+  'md' : 1,
+  'lg' : 1.2,
+  'xl' : 1.4
+);
+
+// variable text size classes
+@each $text-size , $multiplier in $text-size-options {
+  [data-text-size="#{$text-size}"] {
+    @each $text-size in $text-sizes {
+      .text-size-#{$text-size} {
+        font-size: #{$text-size * $multiplier}px;
+
+        // q-input overrides
+        &.q-field--dense {
+          .q-field__control, q-field__marginal {
+            height: 46px * $multiplier;
+            font-size: 16 * $multiplier;
+            line-height: 23 * $multiplier;
+          }
+          .q-field__label {
+            top: (46px * $multiplier) / 4;
+          }
+        }
+        &.q-field--labeled {
+          .q-field__native{
+            line-height: 24 * $multiplier;
+          }
+        }
+
+        // q-select overrides
+        &.q-select {
+          .q-field__label {
+            font-size: 16 * $multiplier;
+            top: 18 * $multiplier;
+            line-height: 23 * $multiplier;
+          }
+          q-field__marginal {
+            height: 56 * $multiplier;
+          }
+          &.q-field--auto-height .q-field--labeled .q-field__control-container {
+            padding-top: 24 * $multiplier;
+          }
+        }
+
+        // q-tab overrides
+        &.q-tab {
+          .q-tab__icon {
+            height: 24 * $multiplier;
+            width: 24 * $multiplier;
+            font-size: 24 * $multiplier;
+          }
+          .q-tab__label {
+            font-size: #{$text-size * $multiplier}px;
+          }
+        }
+      }
+    }
+  }
+}
+
+// fixed text size classes
+@each $text-size in $text-sizes {
+  .text-size-fixed-#{$text-size} {
+    font-size: #{$text-size}px;
+  }
+}

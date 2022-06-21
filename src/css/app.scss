@@ -1,1 +1,38 @@
 // app global css in SCSS form
+@import './panes';
+@import './themes';
+@import './text_sizes';
+
+.q-drawer{
+  background: transparent;
+}
+
+.bg-transparent{
+    background: transparent;
+}
+
+.oak-content{
+  border-radius: 1rem 0rem 1rem 1rem;
+  border-right: .1rem solid white;
+  border-bottom: .1rem solid white;
+}
+
+.top-left{
+  padding-top:.5rem;
+  padding-left:.5rem;
+}
+
+.ss-pane{
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-around;
+  align-content: stretch;
+  align-items: center;
+  padding:1rem;
+}
+
+.select-item{
+  margin: .5rem;
+  width: 8rem;
+  padding: .5rem;
+}

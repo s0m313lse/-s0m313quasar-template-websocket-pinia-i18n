@@ -1,10 +1,22 @@
 <template>
-  <q-page class="flex flex-center">
-    <img
-      alt="Quasar logo"
-      src="~assets/quasar-logo-vertical.svg"
-      style="width: 200px; height: 200px"
-    >
+  <q-page padding>
+    <q-btn color='primary' label="English" 
+      @click="$i18n.locale='en-US'"/>
+    <q-btn color='secondary' label="Francais"
+      @click="$i18n.locale='fr'"/>
+
+    <q-separator class="q-my-lg" />
+
+    <q-btn :label="$t('failed')"/>
+    <q-btn :label="$t('success')"/>
+    <p>
+      {{$t('failed')}}
+    </p>
+    <p>
+      {{$t('success')}}
+    </p>
+
+    <q-separator class="q-my-lg" />
   </q-page>
 </template>
 

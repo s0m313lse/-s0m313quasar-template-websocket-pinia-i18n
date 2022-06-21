@@ -1,0 +1,75 @@
+@use "sass:map";
+// @include radial-gradient();
+
+$themes: (
+  'main': (
+    primary   : #1976D2,
+    secondary : #351252,
+    positive  : #21BA45,
+    negative  : #C10015,
+    medium    : #52a79b,
+    page      : #af3b71,
+    accent : #019ef8,
+    active      : #f8fafa,
+  ),
+  'orange': (
+    primary   : #0078B3,
+    secondary : #FF8C00,
+    positive  : #12B390,
+    negative  : #FF4B0D,
+    medium    : #9e88aa,
+    page      : #ecc7e0,
+    accent : #F4F2ED,
+    active      : #FFF8F1,
+  ),
+  'forest': (
+    primary   : #064109,
+    secondary : #0c910c,
+    positive  : #04fd18,
+    negative  : #611e07,
+    medium    : #d4a971,
+    page      : #d69239,
+    accent : #723f2e,
+    active      : #FFF8F1,
+  ),
+  'alpine': (
+    primary   : #0c461a,
+    secondary : #0b5bc4,
+    positive  : #04b6fd,
+    negative  : #8b0479,
+    medium    : #ada8f5,
+    page      : #98dbd0,
+    accent : #F4F2ED,
+    active      : #FFF8F1,
+  )
+);
+
+@each $theme, $colors in $themes {
+  [data-theme="#{$theme}"] {
+    @each $name, $color in $colors {
+      .bg-#{$name} {
+        background: $color !important;
+      }
+      .text-#{$name} {
+        color: $color !important;
+      }
+
+      // app background gradient
+      @if $name == secondary {
+        &.bg-desktop {
+          background: radial-gradient(circle at bottom right,lighten($color,45), $color)
+        }
+      }
+      // page background gradient
+      @if $name == page {
+        &.bg-page-radial {
+          background: radial-gradient(circle at bottom right,lighten($color,45), $color)
+        }
+      }    }
+
+    // quasar component overrides
+    .q-field__control, q-item--active {
+      color: map.get($colors, primary) !important;
+    }
+  }
+}

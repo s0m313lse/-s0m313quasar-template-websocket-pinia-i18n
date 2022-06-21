@@ -1,47 +1,55 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
-      <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="toggleLeftDrawer"
-        />
-
-        <q-toolbar-title>
-          Quasar App
-        </q-toolbar-title>
-
-        <div>Quasar v{{ $q.version }}</div>
-      </q-toolbar>
+    <q-header class="bg-transparent" style="height:6.5rem;">
+      <div class="flex row flex-end text-white text-size-12">
+        <q-space/>
+        <span><i>{{$t('made_with')}} </i></span>
+        <div style="margin-right:1rem;"
+        > Quasar v{{ $q.version }}</div>
+      </div>
+      <div class="text-weight-bold text-accent text-size-21">
+        <strong>
+         {{$t('titlebar_text')}}
+        </strong>
+      </div>
     </q-header>
 
-    <q-drawer
-      v-model="leftDrawerOpen"
+    <q-drawer class="bg-transparent"
+      :v-if="$q.screen.lt.lg"
       show-if-above
-      bordered
+        :width="150"
+        :breakpoint="400"
     >
-      <q-list>
-        <q-item-label
-          header
-        >
-          Essential Links
-        </q-item-label>
+        <div class="top-left">
+          <div class="text-weight-bold text-accent text-size-21">
+            <strong>
+              {{$t('todo_list')}}
+            </strong>
+          </div>
+          <div class="text-white text-size-12 text-weight-bold">
+            {{$t('event_driven')}}
+          </div>
+        </div>
+        <!-- <q-scroll-area style="height: calc(100% - 4.2rem); margin-top: 192px;"
+          class="bg-transparent"> -->
+          <q-list>
+            <EssentialLink
+              v-for="link in navLinks"
+              :key="link.title"
+              v-bind="link"
+            />
+          </q-list>
+        <!-- </q-scroll-area> -->
 
-        <EssentialLink
-          v-for="link in essentialLinks"
-          :key="link.title"
-          v-bind="link"
-        />
-      </q-list>
-    </q-drawer>
-
+      </q-drawer>
     <q-page-container>
       <router-view />
     </q-page-container>
+    <!-- <q-footer :v-if="$q.screen.lt.md">
+      <div>
+        Footer
+      </div>
+    </q-footer> -->
   </q-layout>
 </template>
 
@@ -49,49 +57,32 @@
 import { defineComponent, ref } from 'vue'
 import EssentialLink from 'components/EssentialLink.vue'
 
-const linksList = [
+const navList = [
   {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev'
+    title: 'home',
+    caption: 'home',
+    icon: 'home',
+    link: '/'
   },
   {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework'
+    title: 'todos',
+    caption: 'todos',
+    icon: 'check',
+    link: '/todos'
   },
   {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
+    title: 'info',
+    caption: 'info',
+    icon: 'info',
+    link: '/about'
   },
   {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
+    title: 'appearance',
+    caption: 'appearance',
+    icon: 'settings',
+    link: '/options'
   }
+
 ]
 
 export default defineComponent({
@@ -102,15 +93,23 @@ export default defineComponent({
   },
 
   setup () {
-    const leftDrawerOpen = ref(false)
 
     return {
-      essentialLinks: linksList,
-      leftDrawerOpen,
-      toggleLeftDrawer () {
-        leftDrawerOpen.value = !leftDrawerOpen.value
-      }
+      navLinks: navList,
+      theme: 'main',
+      textSize: 'md'
     }
+  },
+
+created() {
+    this.theme = {
+      label: 'Orange',
+      value:'orange',
+      icon: 'las lasquare',
+      color: '#FF8C00'
+    }
+    this.textSize = 'md'
   }
 })
+
 </script>
