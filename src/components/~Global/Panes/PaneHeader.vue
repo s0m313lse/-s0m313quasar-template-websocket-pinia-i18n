@@ -1,6 +1,6 @@
 <template>
   <header class="pane-header q-header
-  q-layout__section--marginal bg-accent absolute
+  q-layout__section--marginal bg-secondary absolute
   full-width">
     <div class="q-toolbar pane-toolbar">
       <div class="absolute-left q-ma-xs">

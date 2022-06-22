@@ -8,7 +8,7 @@ export default {
   language: 'Language',
   home: 'Home',
   info: 'Info',
-  made_with: 'made with',
+  made_with: 'made with =>',
   success: 'Action was successful',
   options: 'App Options',
   text_size: 'Text Size',

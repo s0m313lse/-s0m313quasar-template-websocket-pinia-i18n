@@ -1,6 +1,6 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header class="bg-transparent" style="height:6.5rem;">
+    <q-header class="bg-transparent" style="height:4rem;line-height:1.2rem;">
       <div class="flex row flex-end text-white text-size-12">
         <q-space/>
         <span><i>{{$t('made_with')}} </i></span>
@@ -14,7 +14,7 @@
       </div>
     </q-header>
 
-    <q-drawer class="bg-transparent"
+    <q-drawer class="bg-transparent gt-xs"
       :v-if="$q.screen.lt.lg"
       show-if-above
         :width="150"
@@ -42,8 +42,17 @@
         <!-- </q-scroll-area> -->
 
       </q-drawer>
+
+      <q-footer class="lt-sm">
+        Footer
+      </q-footer>
+
     <q-page-container>
-      <router-view />
+      <router-view v-slot="{ Component}">
+        <keep-alive>
+          <component :is="Component" />
+        </keep-alive>
+      </router-view>
     </q-page-container>
     <!-- <q-footer :v-if="$q.screen.lt.md">
       <div>

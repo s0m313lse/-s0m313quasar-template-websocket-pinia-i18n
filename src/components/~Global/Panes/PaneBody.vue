@@ -1,5 +1,8 @@
 <template>
-  <q-scroll-area class="pane-body fit bg-page">
+  <q-scroll-area
+  @scroll="onScroll" 
+  ref="scrollAreaRef"
+  class="pane-body fit bg-page">
     <div class="pane-header-spacer" style="height: 3rem;"></div>
     <div class="pane-body-content">
       <slot />
@@ -9,9 +12,27 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue'
+import { ref, onActivated } from 'vue'
 
-export default defineComponent({
-  name: 'PaneBody'
+export default ({
+  name: 'PaneBody',
+  setup() {
+    const scrollAreaRef = ref(null)
+    let scrollPos = ref(0)
+
+    const onScroll= (info => {
+      scrollPos.value = info.verticalPosition
+    })
+
+    // onActivated = (() => {
+    //   scrollAreaRef.value.setScrollPosition( 'vertical', scrollRef.value)
+    // })
+
+    return {
+      onScroll,
+      scrollAreaRef,
+      scrollPos
+    }
+  }
 })
 </script>

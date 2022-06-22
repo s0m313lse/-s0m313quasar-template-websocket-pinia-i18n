@@ -11,10 +11,10 @@
     background: transparent;
 }
 
-.oak-content{
-  border-radius: 1rem 0rem 1rem 1rem;
-  border-right: .1rem solid white;
-  border-bottom: .1rem solid white;
+.essential-link{
+  margin:.5rem;
+  padding:.5rem;
+  pointer:cursor;
 }
 
 .top-left{
@@ -29,6 +29,12 @@
   align-content: stretch;
   align-items: center;
   padding:1rem;
+}
+
+.ss-drawer{
+  display: flex;
+  flex-flow: row nowrap;
+  padding:1rem;  
 }
 
 .select-item{

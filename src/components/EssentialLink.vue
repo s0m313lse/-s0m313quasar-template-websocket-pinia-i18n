@@ -1,19 +1,21 @@
 <template>
-  <q-item class="text-size-16"
+  <q-item class="text-size-16 essential-link text-primary"
     clickable
     :to="link"
   >
-    <q-item-section
-      style="margin:0rem;padding:0rem;"
-      v-if="icon"
-      avatar
-    >
-      <q-icon :name="icon" color="primary"/>
-    </q-item-section>
-
-    <q-item-section>
-      <q-item-label>{{ $t(title) }}</q-item-label>
-    </q-item-section>
+    <div class="row nowrap">
+      <div
+        style="margin-right:.5rem;"
+        v-if="icon"
+        avatar
+      >
+        <q-icon :name="icon" color="primary"/>
+      </div>
+  
+      <div>
+        <div>{{ $t(title) }}</div>
+      </div>
+    </div>
   </q-item>
 </template>
 

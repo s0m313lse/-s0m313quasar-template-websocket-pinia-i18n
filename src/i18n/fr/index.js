@@ -11,7 +11,7 @@ export default {
   info: 'Info',
   language: 'Langue',
   lang_label: 'Francais',
-  made_with: 'fait avec  ',
+  made_with: 'fait avec =>  ',
   home: 'Domicile',
   options: 'Options de l\'app',
   success: 'Action réussie',
