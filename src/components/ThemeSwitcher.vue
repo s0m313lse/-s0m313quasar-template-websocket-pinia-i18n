@@ -1,14 +1,16 @@
 <template>
   <div>
     <q-select v-model="currentTheme"
-      class="bg-medium select-item oak-content"
+      class="bg-medium app-list-item"
+      style="width:8rem;padding-left:1rem;"
       :options="getThemeLabels()"
       :label="$t('app_theme')"
       @update:model-value="setTheme()"/>
 
 
     <q-select v-model="currentTextSize"
-      class="bg-medium select-item oak-content"
+      class="bg-medium app-list-item"
+      style="width:8rem;padding-left:1rem;"
       :options="getTextSizes()"
       :label="$t('text_size')"
       @update:model-value="setTextSize()"/>
@@ -16,7 +18,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import CssDict from '../css/CssDict'
 
 const showList = ref(false)

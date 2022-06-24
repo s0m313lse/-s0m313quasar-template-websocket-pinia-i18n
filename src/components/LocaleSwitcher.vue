@@ -1,7 +1,8 @@
 <template>
     <div>
       <q-select v-model="currentLocale"
-        class="bg-medium select-item oak-content"
+        class="bg-medium app-list-item"
+        style="width:8rem;padding-left:1rem;"
         :options="getLocaleLabels()"
         :label="$t('language')"
         @update:model-value="$i18n.locale=reverseLocaleLookup[currentLocale]"/>

@@ -1,10 +1,10 @@
 <template>
-  <PagePane left>
+  <PagePane full-width>
     <pane-header>
       <template v-slot:title>{{$t('about_app')}}</template>
     </pane-header>
     <PaneBody>
-      <div class="q-pa-md">
+      <div class="q-pa-md restrain-rem">
         <p>
           This app is a boilerplate starting point for developing your own great app.
         </p>

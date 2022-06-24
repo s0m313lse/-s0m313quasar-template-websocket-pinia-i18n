@@ -17,6 +17,7 @@
     </p>
 
     <q-separator class="q-my-lg" />
+
   </q-page>
 </template>
 
@@ -24,6 +25,7 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'IndexPage'
+  name: 'IndexPage',
+
 })
 </script>

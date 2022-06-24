@@ -1,11 +1,15 @@
 <template>
   <q-layout view="lHh Lpr lFf">
     <q-header class="bg-transparent" style="height:4rem;line-height:1.2rem;">
-      <div class="flex row flex-end text-white text-size-12">
+      <div class="flex row flex-end text-white text-weight-bold text-size-12"
+        style="padding-right:.5rem; padding-top: .5rem;"
+      >
         <q-space/>
-        <span><i>{{$t('made_with')}} </i></span>
-        <div style="margin-right:1rem;"
-        > Quasar v{{ $q.version }}</div>
+          <span><small><i>{{$t('made_with')}} &nbsp; </i></small></span>
+        <div style="margin-right:.5rem;">
+          Quasar v{{ $q.version }}
+        </div>
+        <flag-switcher />
       </div>
       <div class="text-weight-bold text-accent text-size-21">
         <strong>
@@ -33,12 +37,25 @@
         <!-- <q-scroll-area style="height: calc(100% - 4.2rem); margin-top: 192px;"
           class="bg-transparent"> -->
           <q-list>
-            <EssentialLink
+            <q-item class="text-white text-size-12 text-weight-bold"
               v-for="link in navLinks"
               :key="link.title"
               v-bind="link"
-            />
-          </q-list>
+              :active="active"
+              active-class="text-primary"
+              exact
+              clickable
+              :to="link.link"
+              v-ripple>
+              <q-item-section avatar>
+                <q-icon :name="link.icon" color="primary"/>
+              </q-item-section>
+
+              <q-item-section>
+                {{ $t(link.title) }}
+              </q-item-section>
+            </q-item>
+         </q-list>
         <!-- </q-scroll-area> -->
 
       </q-drawer>
@@ -65,6 +82,7 @@
 <script>
 import { defineComponent, ref } from 'vue'
 import EssentialLink from 'components/EssentialLink.vue'
+import FlagSwitcher from 'components/Settings/FlagSwitcher.vue'
 
 const navList = [
   {
@@ -98,7 +116,8 @@ export default defineComponent({
   name: 'MainLayout',
 
   components: {
-    EssentialLink
+    EssentialLink,
+    FlagSwitcher
   },
 
   setup () {

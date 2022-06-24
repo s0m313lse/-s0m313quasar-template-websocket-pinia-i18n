@@ -3,7 +3,8 @@ export default {
     'alpine' :{code:'alpine', label:'Alpine'},
     'main' :{code:'main', label:'Default'},
     'forest' :{code:'forest', label:'Forest'},
-    'orange' :{code:'orange', label:'Orange'}
+    'orange' :{code:'orange', label:'Orange'},
+    'greyscale' :{code:'greyscale', label:'Greyscale'}
   },
   'text_sizes': {
     'sm': {code: 'sm', label: 'Small'},

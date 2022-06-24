@@ -9,8 +9,8 @@ $pane-left-width: 24rem;
     border-radius: 2rem 2rem 2rem 0rem;
     border-right: .1rem solid white;
     border-bottom: .1rem solid white;
-    // border-top: .1rem solid rgb(32, 32, 32);
-    // border-left: .1rem solid rgb(32, 32, 32);
+    border-top: .1rem solid rgb(32, 32, 32);
+    border-left: .1rem solid rgb(32, 32, 32);
     overflow: hidden;
     margin-bottom: $pane-margin;
     margin-left: $pane-margin;
@@ -48,5 +48,4 @@ $pane-left-width: 24rem;
 }
 
 .pane-header{
-  border-bottom: .1rem solid white;
 }

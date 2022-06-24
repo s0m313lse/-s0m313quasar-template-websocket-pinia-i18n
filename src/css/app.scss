@@ -11,6 +11,22 @@
     background: transparent;
 }
 
+.app-dialog{
+  border-radius: 2rem 2rem 2rem 0rem;
+  border-right: .1rem solid white;
+  border-bottom: .1rem solid white;
+  padding: .5rem;
+  min-width: 32rem;
+  margin: 2rem;
+}
+
+.app-list-item{
+  border-radius: 1rem 1rem 1rem 0rem;
+  border-right: .1rem solid white;
+  border-bottom: .1rem solid white;
+  margin:1rem;
+}
+
 .essential-link{
   margin:.5rem;
   padding:.5rem;
@@ -20,6 +36,10 @@
 .top-left{
   padding-top:.5rem;
   padding-left:.5rem;
+}
+
+.restrain-rem{
+  max-width: 50rem;
 }
 
 .ss-pane{

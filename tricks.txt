@@ -1,0 +1,1 @@
+HTML non breaking space character is '&nbsp;' MainLayout.vue

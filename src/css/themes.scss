@@ -10,6 +10,8 @@ $themes: (
     medium    : #52a79b,
     page      : #af3b71,
     accent : #019ef8,
+    light : #F4F2ED,
+    backdrop : #9b94c5,
     active      : #f8fafa,
   ),
   'orange': (
@@ -20,6 +22,8 @@ $themes: (
     medium    : #9e88aa,
     page      : #ecc7e0,
     accent : #F4F2ED,
+    light : #F4F2ED,
+    backdrop : #F4F2ED,
     active      : #FFF8F1,
   ),
   'forest': (
@@ -30,6 +34,8 @@ $themes: (
     medium    : #d4a971,
     page      : #d69239,
     accent : #723f2e,
+    light : #F4F2ED,
+    backdrop : #F4F2ED,
     active      : #FFF8F1,
   ),
   'alpine': (
@@ -40,9 +46,22 @@ $themes: (
     medium    : #ada8f5,
     page      : #98dbd0,
     accent : #F4F2ED,
+    light : #F4F2ED,
+    backdrop : #F4F2ED,
     active      : #FFF8F1,
-  )
-);
+  ),
+  'greyscale': (
+    primary   : #666666,
+    secondary : #000000,
+    positive  : #dddddd,
+    negative  : #222222,
+    medium    : #999999,
+    page      : #AAAAAA,
+    accent : #Ffffff,
+    light : #444444,
+    backdrop : #999999,
+    active      : #333333,
+  ));
 
 @each $theme, $colors in $themes {
   [data-theme="#{$theme}"] {
@@ -63,9 +82,10 @@ $themes: (
       // page background gradient
       @if $name == page {
         &.bg-page-radial {
-          background: radial-gradient(circle at bottom right,lighten($color,45), $color)
+          background: radial-gradient(circle at top left,lighten($color,45), $color)
         }
-      }    }
+      }
+    }
 
     // quasar component overrides
     .q-field__control, q-item--active {
