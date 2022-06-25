@@ -34,8 +34,7 @@
             {{$t('event_driven')}}
           </div>
         </div>
-        <!-- <q-scroll-area style="height: calc(100% - 4.2rem); margin-top: 192px;"
-          class="bg-transparent"> -->
+        <!-- <q-scroll-area style="height: calc(100% - 4.2rem); margin-top: 192px;"> -->
           <q-list>
             <q-item class="text-white text-size-12 text-weight-bold"
               v-for="link in navLinks"
@@ -57,7 +56,6 @@
             </q-item>
          </q-list>
         <!-- </q-scroll-area> -->
-
       </q-drawer>
 
       <q-footer class="lt-sm">
@@ -79,12 +77,11 @@
   </q-layout>
 </template>
 
-<script>
+<script setup>
 import { defineComponent, ref } from 'vue'
-import EssentialLink from 'components/EssentialLink.vue'
 import FlagSwitcher from 'components/Settings/FlagSwitcher.vue'
 
-const navList = [
+const navLinks = [
   {
     title: 'home',
     caption: 'home',
@@ -111,33 +108,4 @@ const navList = [
   }
 
 ]
-
-export default defineComponent({
-  name: 'MainLayout',
-
-  components: {
-    EssentialLink,
-    FlagSwitcher
-  },
-
-  setup () {
-
-    return {
-      navLinks: navList,
-      theme: 'main',
-      textSize: 'md'
-    }
-  },
-
-created() {
-    this.theme = {
-      label: 'Orange',
-      value:'orange',
-      icon: 'las lasquare',
-      color: '#FF8C00'
-    }
-    this.textSize = 'md'
-  }
-})
-
 </script>

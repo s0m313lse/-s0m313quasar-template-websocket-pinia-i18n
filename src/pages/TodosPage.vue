@@ -6,7 +6,7 @@
 
 <script>
 import { defineComponent } from 'vue'
-import TodoList from '../components/Todos/TodoList.vue'
+import TodoList from '../components/Todos/TodoPane.vue'
 
 export default defineComponent({
   name: 'TodosPage',

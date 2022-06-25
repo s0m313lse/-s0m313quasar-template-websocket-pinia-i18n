@@ -6,8 +6,7 @@
 
 <script>
 import { defineComponent } from 'vue'
-import AppOptionsPane from '../components/AppOptionsPane'
-import ThemeSwitcher from '../components/ThemeSwitcher'
+import AppOptionsPane from '../components/Settings/AppOptionsPane'
 
 export default defineComponent({
   name: 'OptionsPage',

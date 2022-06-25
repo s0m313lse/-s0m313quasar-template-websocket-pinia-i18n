@@ -18,9 +18,44 @@ import { date } from 'quasar'
 export const useTodoStore = defineStore('todostore', {
   // convert to a function
   state: () => ({
-    todos: [],
+    todos: [
+      {
+        completed:false,
+        created_at:1655927287975,
+        text:'Create wireframes',
+        user:'admin',
+        id: 0
+      }, {
+        completed:false,
+        created_at:1655927396516,
+        text:'Model data',
+        user:'admin',
+        id: 1
+      }, {
+        completed:false,
+        created_at:1655927508848,
+        text:'Design components',
+        user:'admin',
+        id: 2
+      }, {
+        completed:false,
+        created_at:1655927608848,
+        text:'Code Quasar app',
+        user:'admin',
+        id: 3 
+      }, {
+        completed:false,
+        created_at:1655927708848,
+        text:'Deploy to users',
+        user:'admin',
+        id: 4
+      }
+    ],
     selectedTodo: null,
-    id: 0
+    showCreateTodo: false,
+    showUpdateTodo: false,
+    showDeleteTodo: false,
+    id: 4
   }),
 
   actions: {
@@ -34,30 +69,32 @@ export const useTodoStore = defineStore('todostore', {
           return {
             ...item,
             text: data.text
-          };
+          }
         } else {
-          return item;
+          return item
         }
       })
-
-      //after updating remove selected todo
-      this.selectedTodo = null;
+      this.showUpdateTodo = false
+      this.selectedTodo = null
     },
     /**
      * 
      * @param id 
      */
-    removeTodo(id) {
+    deleteTodo(id) {
       this.todos = this.todos.filter(todo => todo.id !== id)
-    },
+      this.showDeleteTodo = false
+      this.selectedTodo = null  
+        },
     /**
      * 
      * @param todo 
      */
     addTodo(text) {
+      this.showCreateTodo = false
       this.todos = [
         {
-          name: text,
+          text: text,
           id: this.id++,
           user: 'user',
           created_at: Date.now(),

@@ -18,10 +18,10 @@
 </template>
 
 <script setup>
-import PagePane from './~Global/Panes/PagePane'
-import PaneBody from './~Global/Panes/PaneBody'
-import PaneFooter from './~Global/Panes/PaneFooter'
-import PaneHeader from './~Global/Panes/PaneHeader'
+import PagePane from './../~Global/Panes/PagePane'
+import PaneBody from './../~Global/Panes/PaneBody'
+import PaneFooter from './../~Global/Panes/PaneFooter'
+import PaneHeader from './../~Global/Panes/PaneHeader'
 
 import LocaleSwitcher from './LocaleSwitcher'
 import ThemeSwitcher from './ThemeSwitcher'
