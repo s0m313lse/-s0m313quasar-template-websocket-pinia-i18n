@@ -40,7 +40,6 @@
               v-for="link in navLinks"
               :key="link.title"
               v-bind="link"
-              :active="active"
               active-class="text-primary"
               exact
               clickable
