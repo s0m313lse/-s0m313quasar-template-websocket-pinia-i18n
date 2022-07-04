@@ -1,12 +1,12 @@
 <template>
-  <PagePane left>
-    <PaneHeader>
+  <page-pane left>
+    <pane-header>
       <template v-slot:title>{{$t('todos')}}</template>
-    </PaneHeader>
-    <PaneBody>
+    </pane-header>
+    <pane-body>
       <div class="q-pa-md">
         <div class="q-gutter-md" style="margin-left:.2rem;">
-          <app-btn @click="todoStore.showCreateTodo = true"
+          <app-btn @click="showCreateTodo = true"
             color='primary' 
             :label="$t('add_todo')"
             full-width
@@ -35,17 +35,17 @@
           />
         </div>
       </div>
-    </PaneBody>
-    <PaneFooter>
+    </pane-body>
+    <pane-footer>
       <div class="q-ma-sm">
        <span>{{$t('you_have')}}</span>
        {{ todoStore.todos.length }}
        <span v-if="todoStore.todos.length == 1">{{$t('todo')}}</span>
        <span v-else >{{$t('todos')}}</span> .
       </div>
-    </PaneFooter>
-  </PagePane>
-  <AppDialog v-model="todoStore.showCreateTodo" persistent
+    </pane-footer>
+  </page-pane>
+  <app-dialog v-model="showCreateTodo" persistent
     :label="$t('add_todo')"
     @submit="addTodo()"
   >
@@ -67,30 +67,36 @@
         :label="$t('add_todo')"
       />
     </template>
-  </AppDialog>
+  </app-dialog>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { date } from 'quasar'
-import AppBtn from '../~Global/Buttons/AppBtn'
-import AppDialog from '../~Global/Dialogs/AppDialog'
-import NothingHere from '../~Global/NothingHere'
-import PagePane from '../~Global/Panes/PagePane'
-import PaneBody from '../~Global/Panes/PaneBody'
-import PaneFooter from '../~Global/Panes/PaneFooter'
-import PaneHeader from '../~Global/Panes/PaneHeader'
+import { getCurrentInstance, ref } from 'vue'
 import TodoItem from './TodoItem'
 
 import { useTodoStore } from '../../stores/todoStore'
+import controller from '../../stores/storeController'
+const { proxy } = getCurrentInstance()
+const socket = proxy.$socket
+
 const todoStore = useTodoStore()
 
 const createTodoText = ref("")
+const showCreateTodo = ref(false)
 
 const addTodo = () => {
-  todoStore.addTodo(createTodoText.value)
+  const payload = {code: 'todo',
+    data: {
+      action: 'create',
+      payload: {
+        user: 'user',
+        text: createTodoText.value
+      }
+    }
+  }
+  socket.send(JSON.stringify(payload))
+  showCreateTodo.value = false
   createTodoText.value = ''
 }
 
 </script>
-

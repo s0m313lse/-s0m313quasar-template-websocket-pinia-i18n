@@ -5,7 +5,7 @@ $pane-left-width: 24rem;
   z-index:1010;
   transition: transform 0.3s;
 
-  @media (min-width: 26rem) {
+  @media (min-width: 37.45rem) {
     border-radius: 2rem 2rem 2rem 0rem;
     border-right: .1rem solid white;
     border-bottom: .1rem solid white;
@@ -28,7 +28,7 @@ $pane-left-width: 24rem;
     }
 
     &.pane-desktop-full-width{
-      width: calc(100% - (#{$pane-margin} * 2))
+      width: calc(100% - (#{$pane-margin} * 3)) !important;
     }
   }
 
@@ -45,7 +45,4 @@ $pane-left-width: 24rem;
   justify-content: space-between;
   align-items: center;
   align-content: center;
-}
-
-.pane-header{
 }

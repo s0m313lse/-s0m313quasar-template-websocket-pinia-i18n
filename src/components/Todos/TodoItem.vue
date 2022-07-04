@@ -6,7 +6,8 @@
   >
     <q-item-section avatar>
       <q-checkbox
-        v-model="todoStore.todos[index].completed" 
+        v-model="completed"
+        @click="completeTodo(props.todo.id)"
         color="secondary" />
     </q-item-section>
     <q-item-section>
@@ -28,18 +29,20 @@
   <div class="row">
     <q-item-section>
       <q-item-label><small><i>
-        {{$t('created_by')}} {{ props.todo.user }} {{$t('at')}} {{  timeString(props.todo.created_at) }} {{$t('on')}} {{  dayString(props.todo.created_at) }}
+        {{$t('created_by')}} {{ props.todo.user }} 
+        {{$t('at')}} {{  timeString(props.todo.created_at) }}
+        {{$t('on')}} {{  dayString(props.todo.created_at) }}
       </i></small></q-item-label>
     </q-item-section>
   </div>
 </q-item>
-<AppDialog v-model="todoStore.showDeleteTodo" persistent
+<app-dialog v-model="showDeleteTodo" persistent
   :label="$t('delete')"
-  @submit="todoStore.deleteTodo(todoStore.selectedTodo.id)"
+  @submit="deleteTodo(todoStore.selectedTodo.id)"
 >
   {{$t('are_you_sure')}} {{todoStore.selectedTodo.text}} ?
   <template v-slot:buttons>
-    <app-btn @click="todoStore.showDeleteTodo = false"
+    <app-btn @click="showDeleteTodo = false"
       color="negative"
       :label="$t('cancel')"
       v-close-popup
@@ -49,16 +52,16 @@
       :label="$t('delete')"
     />
   </template>
-</AppDialog>
-<AppDialog v-model="todoStore.showUpdateTodo" persistent
+</app-dialog>
+<app-dialog v-model="showUpdateTodo" persistent
   :label="$t('edit')"
-  @submit="todoStore.updateTodo(todoStore.selectedTodo)"
+  @submit="updateTodo(todoStore.selectedTodo)"
 >
   <q-input v-model="todoStore.selectedTodo.text"
     :label="$t('edit')"
   />
   <template v-slot:buttons>
-    <app-btn @click="todoStore.showUpdateTodo = false"
+    <app-btn @click="showUpdateTodo = false"
       color="negative"
       :label="$t('cancel')"
       v-close-popup
@@ -68,15 +71,18 @@
       :label="$t('edit')"
     />
   </template>
-</AppDialog>
+</app-dialog>
 </template>
 
 <script setup>
+import { computed, getCurrentInstance, ref } from 'vue'
 import { date } from 'quasar'
-import AppBtn from '../~Global/Buttons/AppBtn'
-import AppDialog from '../~Global/Dialogs/AppDialog'
 
 import { useTodoStore } from '../../stores/todoStore'
+
+const { proxy } = getCurrentInstance()
+const socket = proxy.$socket
+
 const todoStore = useTodoStore()
 
 const props = defineProps({
@@ -84,10 +90,57 @@ const props = defineProps({
   index: Number
 })
 
+const showDeleteTodo = ref(false)
+const showUpdateTodo = ref(false)
+
+const completed = computed(() => {
+  return todoStore.getTodoByID(props.todo.id).completed
+})
+
 const setSelectedTodo = (index, type) => {
   todoStore.selectedTodo = todoStore.todos[index]
-  if(type === 'update') todoStore.showUpdateTodo = true
-  if(type === 'delete') todoStore.showDeleteTodo = true
+  if(type === 'update') showUpdateTodo.value = true
+  if(type === 'delete') showDeleteTodo.value = true
+}
+
+const completeTodo = (id) => {
+  socket.send(JSON.stringify(
+    {
+      code: 'todo',
+      data: {
+        action: 'complete',
+        payload: id
+      }
+    }
+  ))
+}
+
+const deleteTodo = (id) => {
+  showDeleteTodo.value = false
+  todoStore.selectedTodo = null  
+  socket.send(JSON.stringify(
+    {
+      code: 'todo',
+      data: {
+        action: 'delete',
+        payload: id
+      }
+    }
+  ))
+}
+
+const updateTodo = (todo) => {
+  showUpdateTodo.value = false
+  todoStore.selectedTodo = null  
+  socket.send(JSON.stringify(
+    {
+      code: 'todo',
+      data: {
+        action: 'update',
+        payload: todo
+      }
+    }
+  ))
 }
 
 const timeString = function(timestamp) {

@@ -11,15 +11,15 @@
         </div>
         <flag-switcher />
       </div>
-      <div class="text-weight-bold text-accent text-size-21">
+      <div class="text-weight-bold text-center text-accent text-size-21">
         <strong>
          {{$t('titlebar_text')}}
         </strong>
       </div>
     </q-header>
 
-    <q-drawer class="bg-transparent gt-xs"
-      :v-if="$q.screen.lt.lg"
+    <q-drawer class="bg-transparent"
+      v-if="!onMobile"
       show-if-above
         :width="150"
         :breakpoint="400"
@@ -57,8 +57,20 @@
         <!-- </q-scroll-area> -->
       </q-drawer>
 
-      <q-footer class="lt-sm">
-        Footer
+      <q-footer v-if="onMobile" class="bg-secondary" style="height:4rem;line-height:1.2rem;">
+        <q-tabs>
+          <q-route-tab class="text-white text-size-12 text-weight-bold"
+            v-for="link in navLinks"
+            :key="link.title"
+            v-bind="link"
+            active-class="text-primary"
+            v-ripple
+            :label="link.title"
+            :icon="link.icon"
+            :to="link.link"
+            exact
+          />
+        </q-tabs>
       </q-footer>
 
     <q-page-container>
@@ -70,15 +82,46 @@
     </q-page-container>
     <!-- <q-footer :v-if="$q.screen.lt.md">
       <div>
-        Footer
+        Tjis is Footer
       </div>
     </q-footer> -->
   </q-layout>
 </template>
 
 <script setup>
-import { defineComponent, ref } from 'vue'
+import { computed, getCurrentInstance } from 'vue'
+import { useQuasar } from 'quasar'
+
+import controller from '../stores/storeController'
 import FlagSwitcher from 'components/Settings/FlagSwitcher.vue'
+
+const $q = useQuasar()
+const { proxy } = getCurrentInstance()
+const socket = proxy.$socket
+
+socket.onmessage = (event) => {
+  try {
+    const msg = (JSON.parse(event.data))
+    // console.log('client parsed data is: ' + JSON.stringify(msg))
+    const result = controller(msg)
+    // console.log('result is : ' + JSON.stringify(result))
+    $q.notify(result.data)
+  }
+  catch {
+    console.error('client onMessage failed JSON.parse')
+    console.log(JSON.stringify(event.data))
+  }
+}
+
+socket.send(JSON.stringify(
+  {
+    code: 'handshake'
+  }
+))
+
+const onMobile = computed(() => {
+  return $q.screen.lt.sm
+})
 
 const navLinks = [
   {
