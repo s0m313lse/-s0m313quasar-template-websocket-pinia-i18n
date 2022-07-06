@@ -1,34 +1,30 @@
 import chalk from 'chalk'
-import { WebSocketServer } from 'ws'
-import socketController from './socketController.mjs'
+import express from 'express'
+import history from 'connect-history-api-fallback'
+import serveStatic from 'serve-static'
+import path from 'path';
+import {fileURLToPath} from 'url';
+
+import socket from './socket.mjs'
+
+const basename = path.basename(fileURLToPath(import.meta.url));
+console.log('basename is: ' + basename)
+const __dirname = path.dirname(basename)
+console.log('directory-name 👉️', __dirname);
 
 
-try {
-  const wss = new WebSocketServer({ port: 3000 })
-  console.log(chalk.green('websocket server listening on port 3000'))
-  wss.on('connection', function connection(ws, _request, client) {
-    console.log(chalk.blue.bold('Connection established'))
-    ws.on('message', function message(data) {
-      console.log(`Received message ${data} from user ${client}`)
-      const msg = parse(data)
-      wss.clients.forEach(function each(client) {
-        // if (client !== ws && client.readyState === WebSocket.OPEN) {
-          client.send(JSON.stringify(socketController(msg)))
-        // }
-      })
-    })
-  })
+const port = process.env.PORT || 8080
+
+const app = express()
+socket()
+try{
+  app.use(history())
+  app.use(serveStatic(__dirname + '/dist/spa'))
+  app.listen(port)
+  console.log(chalk.yellow('express server listening on port: ' + port))
 }
 
-catch {
-  console.error('websocket server failed to mount')
-}
-
-function parse (data) {
-  try {
-    return JSON.parse(data)
-  }
-  catch {
-    console.error('SocketServer message failed JSON parse')
-  }
+catch (error) {
+  console.error(chalk.red('express server failed to mount'))
+  console.error(error)
 }

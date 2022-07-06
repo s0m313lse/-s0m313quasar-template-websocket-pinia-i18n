@@ -6,10 +6,11 @@
   "author": "s0m313lse",
   "private": true,
   "scripts": {
-    "lint": "eslint --ext .js,.vue ./",
+    "dev": "node src/server/dev.mjs",
     "format": "prettier --write \"**/*.{js,vue,scss,html,md,json}\" --ignore-path .gitignore",
-    "test": "echo \"No test specified\" && exit 0",
-    "server": "node src/server/index.mjs"
+    "lint": "eslint --ext .js,.vue ./",
+    "server": "node src/server/index.mjs",
+    "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
